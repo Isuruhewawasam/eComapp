@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h3 class="text-center fw-bolder mt-3 g-2">{{product_details.product_name}}</h3>
+<hr class="mt-4">
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{product_details.image.url}}" class="card-img-top" alt="..."width="100%" height="100%">
+        </div>
+    
+    
+        <div class="col-md-6">
+            <h4 class="fw-bolder">Product Name: {{product_details.product_name}}</h4>
+           <strike class="badge bg-danger text-warp">Market Price: Rs.{{product_details.market_price}}.00</strike> 
+            <h5>Selling Price: Rs.{{product_details.selling_price}}.00</h5>
+            <a href="{% url 'add_to_cart' product_details.id %}" class="btn btn-primary">Add to cart</a>
+            <hr>
+            <p class="fw-bolder"> Discriptions:{{product_details.discriptions}}</p>
+            <p class="text-info">Worrenty:{{product_details.worenty}}</p>
+            <p class="text-info">Return Policy:{{product_details.return_policy}}</p>
+            <p class="text-success">(Viewed: {{product_details.view_count}} times)</p>
+            
+            
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

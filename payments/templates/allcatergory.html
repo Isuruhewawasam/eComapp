@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+<div class="container">
+    <h3 class="text-center mt-3 fw-bold shadow mb-3">All Catergory Page</h3>
+    {% for cat in allcatergory %}
+        <h4 class="fw-bold">{{cat.title}}</h4>
+        <hr class="mt-3">
+    <div class="row ">
+        {% for pro in cat.product_set.all %}
+        <div class="col-md-4 mt-3">
+            <div class="card shadow" style="width: 18rem;" >
+				<img src="{{pro.image.url}}" class="card-img-top" alt="..."width="200" height="200">
+				<div class="card-body">
+				  <h5 class="card-title"><a class="lin text-decoration-none" href="{% url 'product_details' pro.slug %}">{{pro.product_name}}</a></h5>
+				  <strike class="badge bg-primary text-warp">Rs.{{pro.market_price}}.00</strike>
+                  <h6 class="fw-bold text-danger text-center">Rs.{{pro.selling_price}}.00</h6>
+                  <a href="{% url 'add_to_cart' pro.id %}" class="btn btn-primary">Add to cart</a>
+				  
+				</div>
+			</div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    {% endfor %}
+
+
+</div>
+
+
+{% endblock body %}
+
+
+

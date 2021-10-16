@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block body %}
+
+    
+   
+
+<div class="container">
+  <h3 class="text-center text-decoration-underline mt-3 fw-bold">Checkout Page</h3>
+  <form method="post" action="https://sandbox.payhere.lk/pay/checkout">
+  {% csrf_token %}   
+    <input type="hidden" name="merchant_id" value="1218640">    <!-- Replace your Merchant ID -->
+    <input type="hidden" name="return_url" value="{% url 'home' %}">
+    <input type="hidden" name="cancel_url" value="{% url ' ' %}">
+    <input type="hidden" name="notify_url" value="">  
+    <br><br><h4 class="">Item Details</h4><br>
+    <hr class="mt-3">
+    
+   
+    
+    <label class="fw-bold" for="">Order id : {{order.id}}</label><br>
+    <input type="hidden" name="order_id" value="{{order.id}}">
+    
+    <input type="hidden" name="items" value="default"><br>
+   
+    <input type="hidden" name="currency" value="LKR">
+    <label class="fw-bold" for="">Amount : Rs{{order.total}} .00</label>
+    <input type="hidden" name="amount" value="{{order.total}}">  
+    <br><br><h4>Customer Details</h4><br>
+    <hr>
+    <label class="fw-bold" for="">Customer Name :{{order.order_by}}<input type="hidden" name="first_name" value="{{order.order_by}}"></label>
+    
+    <label class="fw-bold" for="">{{order.last_name}}<input type="hidden" name="last_name" value="{{order.last_name}}"></label><br>
+    
+    
+    <label class="fw-bold" for="">Email :{{order.email}} <input type="hidden"  name="email" value="{{order.email}}"></label><br>
+    <label class="fw-bold" for="">Address :{{order.shipping_address}}<input type="hidden" name="address" value="{{order.shipping_address}}"></label><br>
+    <label class="fw-bold" for="">City :{{order.town}}<input type="hidden" name="city" value="{{order.town}}"></label><br>
+     <label class="fw-bold" for="">Phone Number :{{order.mobile}}<input type="hidden" name="phone" value="{{order.mobile}}"></label>
+    
+    
+    
+    <input type="hidden" name="country" value="Sri Lanka"><br><br> 
+    
+    <button class="btn btn-outline-primary mt-3" type="submit" >Buy Now</button>
+    
+    
+  </form>
+
+
+</div>
+
+
+{% endblock body %}

@@ -1,0 +1,184 @@
+
+.navbar{
+    font-size: 16px;
+    top: 0;
+    left: 0;
+}
+.nav-img{
+    border-radius: 50%;
+    background-color: black;
+    width: 50px;
+    height: 50px;
+}
+
+.navbar-light .navbar-nav .nav-link{
+    padding: 0 30px;
+    font-family:'Times New Roman';
+    color: #000;
+    transition: 0.3s ease;
+
+}
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link.active{
+    color: coral;
+
+}
+
+#bar{
+    font-size: 1.5rem;
+    padding: 7px;
+    cursor:pointer;
+    font-weight: 500;
+    transition: 0.3s ease;
+    color: #000;
+
+}
+#bar:hover,
+#bar.active{
+    color: coral;
+}
+
+
+.navbar-light .navbar-toggle{
+    border: none;
+    outline: none;
+
+
+
+}
+
+.dropdown-item{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 2px;
+    padding: 2px 2px 2px 2px;
+    
+    
+}
+
+hr{
+
+    background-color:rgb(233, 7, 7);
+    height: 8px;
+    width: 30px;
+    
+}
+#bg{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:1500px 1600px;
+    
+
+}
+.new{
+    font-family:'Times New Roman', Times, serif;
+    color: coral;
+    font-weight: bold;
+    
+}
+.product-center{
+    cursor: pointer;
+    margin: bottom 2rem;
+
+}
+
+
+
+
+.product-center .buy-btn{
+    color: red;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: 0.3s all;
+}
+
+.product-center:hover .buy-btn{
+    
+    transform: translateY(0);
+    opacity: 1;
+    
+}
+.star{
+    font-size: 0.8rem;
+    color:goldenrod;
+    margin: 2px;
+}
+
+.card-body .btn{
+    color: red;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: 0.3s all;
+}
+
+.card-body:hover .btn{
+    
+    transform: translateY(0);
+    opacity: 1;
+}
+.card img{
+    cursor: pointer;
+    padding:2px;
+    margin-top: 2px;
+}
+
+footer{
+    background-color: black;
+}
+footer img{
+    
+    border-radius: 25%;
+    width: 80px;
+    height: 80px;
+}
+
+footer h5{
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+footer h6{
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+}
+footer li{
+    padding-bottom: 4px;
+
+}
+footer li a{
+    font-size: 0.8rem;
+    color: wheat;
+    
+} 
+footer li a:hover{
+    
+    color: white
+    
+} 
+footer p{
+    color: #999;
+    font-size: 0.8rem;
+}
+
+footer .copyright i{
+    color: #000;
+    width: 38px;
+    height: 38px;
+    background-color: white;
+    display:inline-block;
+    text-align: center;
+    line-height: 38px;
+    border-radius: 50%;
+    transition: 0.3s ease;
+    margin: 0.5px;
+}
+footer .copyright i:hover{
+    color: #fff;
+    background-color: coral;
+    
+
+}
+
+
+

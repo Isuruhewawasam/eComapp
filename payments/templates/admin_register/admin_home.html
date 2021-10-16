@@ -1,0 +1,66 @@
+{% extends 'admin_register/admin_base.html' %}
+
+
+{% block body %}
+
+    <h1>this is admin home</h1>
+
+
+    
+
+
+    
+    
+    <div class="container">
+        <div class="row">
+            <h4 class ='text-center'>Orders</h4><hr>
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>order number</th>
+                            <th>Name</th>
+                            <th>Phone Number</th>
+                            <th>Address</th>
+                            <th>Subtotal</th>
+                            <th>Order status</th>
+                            
+                        </tr>
+                    </thead>
+                <tbody>
+                        {% for cp in order %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{cp.id}}</td>
+
+                            <td>{{cp.order_by}}</td>
+                            <td>{{cp.mobile}}</td>
+                            <td>{{cp.shipping_address}}</td>
+                            <td>{{cp.total}}</td>
+                            <td>{{cp.order_status}}</td>
+                           
+                        </tr>
+                          
+                        {% endfor %}
+                        
+                </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+    
+    
+    
+    
+    {% endblock body %}
+    
+    
+    
+    
+    
+    
+
+
+

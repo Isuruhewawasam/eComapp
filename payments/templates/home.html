@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="container ">
+    <div class = "row mb-5 mt-5">
+      <div class ="col-md-12">
+        <h1 style="color:rgb(245, 8, 28); font-size: 50px; font-family: 'Times New Roman'; " class="text-center mt-3 fw-bold shadow-sm">FUTURE FASION STORE</h1>
+    <hr class="mx-auto mt-3">
+      </div>
+    </div>
+
+    
+    <div class="row">
+        <div class="slider"> 
+        {% for s in product_slider %}
+            <div class="col-12">
+                <img class="d-block w-100" src="{{s.image.url}}" width="250px" height="500px">
+            </div>
+        {% endfor %}      
+        </div>
+    </div>
+    
+    <hr class="mx-auto">
+    <section id="featured" class="my-5 pb-5">
+      <div class="container text-center mt-5 py-5">
+        <h3 class="new">New Featured</h3>
+        <hr class="mx-auto">
+        <p style="font-weight: bold; color: #000;">Here you can check out our new products with fair price on Dtextile</p>
+      </div>
+      <div class="row mx-auto container-fluid">
+        <div class="product-center">
+          
+          {% for pro in new_items %}
+          <div class="col-auto mt-5 text-center">
+            <center><img class="img mb-3" src="{{pro.image.url}}" alt="" width="180" height="180"></center>
+            <div class="star">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+
+            </div>
+            <h5 class="p-name"><a class="lin text-decoration-none" href="{% url 'product_details' pro.slug %}">{{pro.product_name}}</a></h5>
+            <strike class="badge bg-primary text-warp">Rs.{{pro.market_price}}.00</strike>
+            <h4>Rs.{{pro.selling_price}}.00</h4>
+            <a href="{% url 'add_to_cart' pro.id %}" class="buy-btn"><i class="fas fa-shopping-bag"></i></a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </section>
+    <section>
+      <hr class=" mx-auto mt-3">
+    <h2 style="color: chocolate;font-family: Cambria; " class="text-center mt-3 fw-bold shadow-sm">Products</h2>
+    <div class="row ">
+        {% for pro in product %}
+      <div class="col-lg-4 col-md-4 col-12 mt-5">
+        <div class="card shadow-lg" style="width: 15rem;" >
+				  <img src="{{pro.image.url}}" class="card-img-top" alt="..."width="180" height="180">
+          
+				  <div class="card-body">
+				    <h5 class="card-title text-center"><a class="lin text-decoration-none" href="{% url 'product_details' pro.slug %}">{{pro.product_name}}</a></h5>
+            <div class="star" style="color: goldenrod; padding: 10px 0; font-size: 0.8rem; text-align: center;">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+				    <center><strike class="badge bg-primary text-warp">Rs.{{pro.market_price}}.00</strike></center>
+            <h6 class="fw-bold text-danger text-center">Rs.{{pro.selling_price}}.00</h6>
+           <center><a href="{% url 'add_to_cart' pro.id %}" class="btn"><i class="fas fa-shopping-bag"></i></a></center> 
+				  
+				  </div>
+			  </div>
+      </div>
+        
+        {% endfor %}
+    </div>
+    </section>
+    
+    <hr class="mx-auto mt-5">
+
+    <nav aria-label="...">
+        <ul class="pagination">
+            {% if product.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ product.previous_page_number }}" tabindex="-1" aria-disabled="true">Previous</a>
+              </li>
+            {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+          {% endif %}
+          {% for i in product.paginator.page_range %}
+            {% if i == product.number %}
+            <li class="page-item active"><a class="page-link">{{i}}</a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+            {% endif %}
+          
+          {% endfor %}
+          {% if product.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ product.next_page_number }}">Next</a>
+          </li>
+          {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+</div>
+        
+{% endblock %}
+
+    
