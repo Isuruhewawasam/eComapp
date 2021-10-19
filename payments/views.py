@@ -318,7 +318,7 @@ class AdminRegisterView(CreateView):
 class AdminlogoutView(View):
     def get(self,request):
         logout(request)
-        return redirect(reverse_lazy('admin_home'))
+        return redirect(reverse_lazy('home'))
 
 class AdminloginView(FormView):
 

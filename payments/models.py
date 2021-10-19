@@ -37,7 +37,7 @@ class Catergory(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("addcatergory")
+        return reverse("admin_product")
 
 
 # PRODUCT STORE KARANA DATABASE EKA
