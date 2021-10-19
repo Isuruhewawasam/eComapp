@@ -83,6 +83,7 @@ class addCatergoryView(CreateView):
     model = Catergory
     form_class = CatergoryForm
     template_name ='addcatergory.html'
+    
 
 
 
