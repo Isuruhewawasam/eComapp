@@ -5,9 +5,10 @@ from django.contrib.auth.models import User
 
 
 class productForm(forms.ModelForm):
+    more_img =forms.FileField(required=False, widget=forms.FileInput(attrs={'class':'form-control','multiple':True}))
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = ['catergory','product_name','slug','image','market_price','selling_price','discriptions','worenty','return_policy']
 
        
         widgets ={
@@ -21,8 +22,9 @@ class productForm(forms.ModelForm):
             'discriptions':forms.Textarea(attrs={'class':'form-control'}),
             'worenty':forms.TextInput(attrs={'class':'form-control'}),
             'return_policy':forms.TextInput(attrs={'class':'form-control'}),
-            'view_count':forms.TextInput(attrs={'class':'form-control'}),
             
+            
+
         }
 
 class CatergoryForm(forms.ModelForm):

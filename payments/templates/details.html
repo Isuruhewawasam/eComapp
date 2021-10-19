@@ -6,12 +6,21 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
-            <img src="{{product_details.image.url}}" class="card-img-top" alt="..."width="100%" height="100%">
+        <div class="col-md-4">
+            <img src="{{product_details.image.url}}" class="card-img-top" alt="..."width="50%" height="75%">
+            <div class="row">
+                {% for pi in product_details.pimage_set.all %}
+                <div class="col-md-4 p-3">
+                    <img src="{{pi.ima.url}}" alt="" class="img" width="100px" height="100px object-fit: contain" >
+                </div>
+                {% endfor%}
+            </div>
         </div>
+        
+
     
     
-        <div class="col-md-6">
+        <div class="col-md-8">
             <h4 class="fw-bolder">Product Name: {{product_details.product_name}}</h4>
            <strike class="badge bg-danger text-warp">Market Price: Rs.{{product_details.market_price}}.00</strike> 
             <h5>Selling Price: Rs.{{product_details.selling_price}}.00</h5>

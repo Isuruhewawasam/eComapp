@@ -1,7 +1,7 @@
 
 from payments.models import Customer
 from django.urls import path
-from .views import HomeView,addproductView,addCatergoryView,allCatergoryView,productdetailsView,addToCartView,CartView,ManageCartView,EmptyCartView,CheckoutView,placeOrderView,modelstaticView,modelstaticViewtemp,SliderImage,CustomerRegisterView,CustomerlogoutView,CustomerloginView,AdminRegisterView,AdminHome,AdminlogoutView,AdminloginView
+from .views import HomeView,addproductView,addCatergoryView,allCatergoryView,productdetailsView,addToCartView,CartView,ManageCartView,EmptyCartView,CheckoutView,placeOrderView,modelstaticView,modelstaticViewtemp,SliderImage,CustomerRegisterView,CustomerlogoutView,CustomerloginView,AdminRegisterView,AdminHome,AdminlogoutView,AdminloginView,adminProduct
 urlpatterns = [
     ###### app urls #####
     path('',HomeView.as_view(),name='home'),
@@ -30,6 +30,7 @@ urlpatterns = [
     path('admin-logout/',AdminlogoutView.as_view(),name='admin_logout'),
     path('admin-login/',AdminloginView.as_view(),name='admin_login'),
     path('admin-home',AdminHome.as_view(),name='admin_home'),
+    path('admin-product',adminProduct.as_view(),name='admin_product'),
     
 
 

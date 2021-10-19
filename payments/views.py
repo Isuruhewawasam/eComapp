@@ -6,7 +6,7 @@ from django.http import request
 from django.shortcuts import render,redirect
 from django.views.generic import TemplateView,CreateView,FormView,View
 from.forms import productForm,CatergoryForm,placeOrder,sliderImageform,customerform,loginForm,Adminform
-from.models import Cart, CartProduct, Order, Product,Catergory,slider,Customer,Admin_user
+from.models import Cart, CartProduct, Order, Product,Catergory,slider,Customer,Admin_user, Pimage
 from django.contrib.auth import authenticate,login,logout
 from django.urls import reverse_lazy,reverse
 from django.core.paginator import Paginator
@@ -64,16 +64,26 @@ class HomeView(EcomMixin, TemplateView):
 
 # PRODUCT ADD KARANA VIEW EKA
 class addproductView(CreateView):
-    model = Product
+    
     form_class = productForm
     template_name ='addproduct.html'
+    success_url=reverse_lazy('admin_product')
 
+    def form_valid(self, form):
+        ## save karanna
+        p = form.save()
+        ### more image add karanna
+        mor_img= self.request.FILES.getlist('more_img')
+        for i in mor_img:
+            Pimage.objects.create(proimage= p, ima= i)
+        return super().form_valid(form)
 
 # CATERGORY ADD KARANA VIEW EKA
 class addCatergoryView(CreateView):
     model = Catergory
     form_class = CatergoryForm
     template_name ='addcatergory.html'
+
 
 
 # CATERGORY WIDIYATA PRODUCT PENNANA VIEW EKA
@@ -374,7 +384,15 @@ class CustomerloginView(FormView):
             return next_url
         else:
             return self.success_url
-            
+
+
+
+class adminProduct(TemplateView):
+    template_name ='admin_register/admin_product.html'
+    def get_context_data(self, **kwargs):
+        context =super().get_context_data(**kwargs)
+        context['admin_product']=Product.objects.all()
+        return context            
 
 
 

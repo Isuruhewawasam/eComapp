@@ -1,0 +1,68 @@
+{% extends 'admin_register/admin_base.html' %}
+
+
+{% block body %}
+
+    <h1>this is  All Products</h1>
+
+
+    
+
+
+    
+    
+    <div class="container">
+        <div class="row">
+            
+            <h4 class ='text-center'>All Products</h4><hr>
+            <div class="col-md-3 col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>Product Name</th>
+                            <th>Market Price</th>
+                            <th>Sale Price</th>
+                            <th>Image</th>
+                            <th>Worrenty</th>
+                            <th>Retutn policy</th>
+                            
+                        </tr>
+                    </thead>
+                <tbody>
+                        {% for cp in admin_product %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            
+
+                            <td>{{cp.product_name}}</td>
+                            <td>{{cp.market_price}}</td>
+                            <td>{{cp.selling_price}}</td>
+                            <td><img src="{{cp.image.url}}" alt="" width="50px" height="50px"></td>
+                            <td>{{cp.worenty}}</td>
+                            <td>{{cp.return_policy}}</td>
+                           
+                        </tr>
+                          
+                        {% endfor %}
+                        
+                </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+    
+    
+    
+    
+    {% endblock body %}
+    
+    
+    
+    
+    
+    
+
+
+

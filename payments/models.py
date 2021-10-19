@@ -37,7 +37,7 @@ class Catergory(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("home")
+        return reverse("addcatergory")
 
 
 # PRODUCT STORE KARANA DATABASE EKA
@@ -56,9 +56,14 @@ class Product(models.Model):
     def __str__(self):
         return self.product_name
 
-    def get_absolute_url(self):
-        return reverse("home")
+class Pimage(models.Model):
+    proimage=models.ForeignKey(Product,on_delete=models.CASCADE)
+    ima =models.ImageField(upload_to='product/images')
 
+    def __str__(self):
+        return self.proimage
+    
+    
 
 #ALUTHIN CART EKAK CREATE KALAMA EKA STORE WENA DATABASE EKA
 class Cart(models.Model):

@@ -12,5 +12,7 @@ admin.site.register(CartProduct)
 admin.site.register(Order)
 admin.site.register(slider)
 admin.site.register(Admin_user)
+admin.site.register(Pimage)
+
 
 
