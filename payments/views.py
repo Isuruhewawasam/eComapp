@@ -28,6 +28,14 @@ class EcomMixin(object):
                 cart_obj.save()
 
         return super().dispatch(request, *args, **kwargs)
+
+class AdminRequiredMixin(object):
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and Admin_user.objects.filter(user=request.user).exists():
+            pass
+        else:
+            return redirect("/admin-login/")
+        return super().dispatch(request, *args, **kwargs)
     
 
 # search karana view eka
@@ -75,26 +83,29 @@ class HomeView(EcomMixin, TemplateView):
 
 
 # PRODUCT ADD KARANA VIEW EKA
-class addproductView(CreateView):
+class addproductView(AdminRequiredMixin,CreateView):
     
     form_class = productForm
-    template_name ='addproduct.html'
+    template_name ='admin_register/addproduct.html'
     success_url=reverse_lazy('admin_product')
 
+    
+
     def form_valid(self, form):
-        ## save karanna
         p = form.save()
         ### more image add karanna
         mor_img= self.request.FILES.getlist('more_img')
         for i in mor_img:
             Pimage.objects.create(proimage= p, ima= i)
         return super().form_valid(form)
+    
+    
 
 # CATERGORY ADD KARANA VIEW EKA
 class addCatergoryView(CreateView):
     model = Catergory
     form_class = CatergoryForm
-    template_name ='addcatergory.html'
+    template_name ='admin_register/addcatergory.html'
     
 
 
@@ -280,39 +291,40 @@ class placeOrderView(CreateView):
 
 
 
-class modelstaticView(TemplateView):
-    template_name='index.html'
-    def get_context_data(self, **kwargs):
-        context=super().get_context_data(**kwargs)
-        context['my name']=Product.objects.all()
-        
-        return context
 
-class modelstaticViewtemp(TemplateView):
-    template_name='indextem.html'
-    def get_context_data(self, **kwargs):
-        context=super().get_context_data(**kwargs)
-        context['product']=Product.objects.all()
-        return context
 
 
 ## slider add karana view eka
-class SliderImage(CreateView):
+
+
+
+
+class SliderImage(AdminRequiredMixin,CreateView):
     model = slider
     form_class = sliderImageform
-    template_name ='slider.html'
+    template_name ='admin_register/slider.html'
 
+    
 
 ### admin home eka
 class AdminHome(TemplateView):
     template_name='admin_register/admin_home.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+        if user.is_authenticated and user.admin_user:
+            pass
+        else:
+            return redirect("/admin-login/?next=/admin-home/")  ###?next=/admin awasha karana bawa/
+
+        return super().dispatch(request, *args, **kwargs)
     def get_context_data(self, **kwargs):
         context =super().get_context_data(**kwargs)
         context['order']=Order.objects.all().order_by('-id')
         return context
 
 ## Admin add karana view eka
-class AdminRegisterView(CreateView):
+class AdminRegisterView(AdminRequiredMixin,CreateView):
     form_class = Adminform
     template_name ='admin_register/admin_register.html'
     success_url= reverse_lazy('admin_home')
@@ -342,13 +354,15 @@ class AdminloginView(FormView):
     def form_valid(self, form):
         uname = form.cleaned_data.get("username")
         pword = form.cleaned_data["password"]
-        usr = authenticate(username=uname,password=pword)
-        if usr is not None and Admin_user.objects.filter(user = usr).exists():
+        usr = authenticate(username=uname, password=pword)
+        if usr is not None and Admin_user.objects.filter(user=usr).exists():
             login(self.request, usr)
         else:
-            return render(self.request,self.template_name, {"form" : self.form_class,'error':'user is invalid'})
+            return render(self.request, self.template_name, {"form": self.form_class, "error": "Invalid credentials"})
 
-        return super().form_invalid(form)
+        return super().form_valid(form)
+
+    
 
 
 ## customer add karana view eka
@@ -374,23 +388,23 @@ class CustomerlogoutView(View):
 
 class CustomerloginView(FormView):
 
-    success_url= reverse_lazy("home")
+    
     form_class = loginForm
     template_name ='customer_login.html'
+    success_url=reverse_lazy("home")
     
 ## form eken authenticate karala user innawada balana method eka
     def form_valid(self, form):
         uname = form.cleaned_data.get("username")
         pword = form.cleaned_data["password"]
-        usr = authenticate(username=uname,password=pword)
-        if usr is not None and Customer.objects.filter(user = usr).exists():
+        usr = authenticate(username=uname, password=pword)
+        if usr is not None and Customer.objects.filter(user=usr).exists():
             login(self.request, usr)
         else:
-            return render(self.request,self.template_name, {"form" : self.form_class,'error':'user is invalid'})
+            return render(self.request, self.template_name, {"form": self.form_class, "error": "Invalid credentials"})
 
-        return super().form_invalid(form)
-        
-##  success_url eka override karana vidiya
+        return super().form_valid(form)
+
     def get_success_url(self):
         if "next" in self.request.GET:
             next_url = self.request.GET.get("next")
@@ -400,8 +414,11 @@ class CustomerloginView(FormView):
 
 
 
-class adminProduct(TemplateView):
+class adminProduct(AdminRequiredMixin,TemplateView):
     template_name ='admin_register/admin_product.html'
+
+    
+
     def get_context_data(self, **kwargs):
         context =super().get_context_data(**kwargs)
         context['admin_product']=Product.objects.all().order_by('-id')

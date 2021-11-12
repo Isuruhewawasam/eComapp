@@ -57,7 +57,7 @@ ROOT_URLCONF = 'checkout.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,14 +125,11 @@ MEDIA_URL ='/media/'
 
 
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    '/var/www/static/',
-]
 
 
 
-STATICFILES_DIRS = (
+
+STATIC_ROOT = (
     os.path.join(BASE_DIR, 'static'),
 )
 
