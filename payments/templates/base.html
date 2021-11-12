@@ -54,6 +54,12 @@
             </a>
             
           </li>
+          <li class="nav-item" >
+          <form class="d-flex"action ="{% url 'search'%}" method="GET">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name ='keyword' Required>
+          <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+          </li>
            <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             
@@ -205,6 +211,16 @@
       }
     ]
   });
+
+  $('.small-img-col').slick({
+  
+  infinite: true,
+  speed: 500,
+  fade: true,
+  cssEase: 'linear'
+});
+
+ 
       
       </script>
     

@@ -1,39 +1,49 @@
 {% extends 'base.html' %}
 
-{% block body %}
-<h3 class="text-center fw-bolder mt-3 g-2">{{product_details.product_name}}</h3>
-<hr class="mt-4">
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <img src="{{product_details.image.url}}" class="card-img-top" alt="..."width="50%" height="75%">
-            <div class="row">
-                {% for pi in product_details.pimage_set.all %}
-                <div class="col-md-4 p-3">
-                    <img src="{{pi.ima.url}}" alt="" class="img" width="100px" height="100px object-fit: contain" >
+<section class="my-5 pt-5">
+    {% block body %}
+    <h3 class="text-center fw-bolder mt-3 g-2">{{product_details.product_name}}</h3>
+    <hr class="mt-4">
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-lg-5 col-md-12 col-12">
+                <img src="{{product_details.image.url}}" class="img-fluid pb-1" alt="..." id="maim-img">
+                <div class="small-img-group" style="display: inline; justify-content: space-between;">
+                    <div class="small-img-col" style="flex-basis: 24%; cursor: pointer;">
+                        {% for pi in product_details.pimage_set.all %}
+                        
+                        <img src="{{pi.ima.url}}" alt="" class="img-small" width="100px" height="300px">
+                        
+                        {% endfor%}
+                    </div>
+
                 </div>
-                {% endfor%}
+                
             </div>
-        </div>
-        
+            
+            <div class="col-lg-6 col-md-12 col-12">
+                <h4 class="fw-bolder">Product Name: {{product_details.product_name}}</h4>
+                <strike class="badge bg-danger text-warp">Market Price: Rs.{{product_details.market_price}}.00</strike> 
+                <h5>Selling Price: Rs.{{product_details.selling_price}}.00</h5>
+                <a href="{% url 'add_to_cart' product_details.id %}" class="btn btn-primary">Add to cart</a>
+                <hr>
+                <p class="fw-bolder"> Discriptions:{{product_details.discriptions}}</p>
+                <p class="text-info">Worrenty:{{product_details.worenty}}</p>
+                <p class="text-info">Return Policy:{{product_details.return_policy}}</p>
+                <p class="text-success">(Viewed: {{product_details.view_count}} times)</p>
+
+            </div>
 
     
     
-        <div class="col-md-8">
-            <h4 class="fw-bolder">Product Name: {{product_details.product_name}}</h4>
-           <strike class="badge bg-danger text-warp">Market Price: Rs.{{product_details.market_price}}.00</strike> 
-            <h5>Selling Price: Rs.{{product_details.selling_price}}.00</h5>
-            <a href="{% url 'add_to_cart' product_details.id %}" class="btn btn-primary">Add to cart</a>
-            <hr>
-            <p class="fw-bolder"> Discriptions:{{product_details.discriptions}}</p>
-            <p class="text-info">Worrenty:{{product_details.worenty}}</p>
-            <p class="text-info">Return Policy:{{product_details.return_policy}}</p>
-            <p class="text-success">(Viewed: {{product_details.view_count}} times)</p>
-            
-            
+           
         </div>
     </div>
-</div>
-
+    
+    
 {% endblock body %}
+
+
+</section>

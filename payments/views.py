@@ -10,6 +10,7 @@ from.models import Cart, CartProduct, Order, Product,Catergory,slider,Customer,A
 from django.contrib.auth import authenticate,login,logout
 from django.urls import reverse_lazy,reverse
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 
 
@@ -28,6 +29,17 @@ class EcomMixin(object):
 
         return super().dispatch(request, *args, **kwargs)
     
+
+# search karana view eka
+class Search_kew_word(TemplateView):
+    template_name='search.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        kw = self.request.GET['keyword']
+        results = Product.objects.filter(Q(product_name__icontains=kw)|Q(discriptions__icontains=kw))
+        context['result']=results
+        return context
 
 
 
@@ -296,7 +308,7 @@ class AdminHome(TemplateView):
     template_name='admin_register/admin_home.html'
     def get_context_data(self, **kwargs):
         context =super().get_context_data(**kwargs)
-        context['order']=Order.objects.all()
+        context['order']=Order.objects.all().order_by('-id')
         return context
 
 ## Admin add karana view eka
@@ -392,7 +404,7 @@ class adminProduct(TemplateView):
     template_name ='admin_register/admin_product.html'
     def get_context_data(self, **kwargs):
         context =super().get_context_data(**kwargs)
-        context['admin_product']=Product.objects.all()
+        context['admin_product']=Product.objects.all().order_by('-id')
         return context            
 
 

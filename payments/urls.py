@@ -1,7 +1,7 @@
 
 from payments.models import Customer
 from django.urls import path
-from .views import HomeView,addproductView,addCatergoryView,allCatergoryView,productdetailsView,addToCartView,CartView,ManageCartView,EmptyCartView,CheckoutView,placeOrderView,modelstaticView,modelstaticViewtemp,SliderImage,CustomerRegisterView,CustomerlogoutView,CustomerloginView,AdminRegisterView,AdminHome,AdminlogoutView,AdminloginView,adminProduct
+from .views import HomeView,addproductView,addCatergoryView,allCatergoryView,productdetailsView,addToCartView,CartView,ManageCartView,EmptyCartView,CheckoutView,placeOrderView,modelstaticView,modelstaticViewtemp,SliderImage,CustomerRegisterView,CustomerlogoutView,CustomerloginView,AdminRegisterView,AdminHome,AdminlogoutView,AdminloginView,adminProduct,Search_kew_word
 urlpatterns = [
     ###### app urls #####
     path('',HomeView.as_view(),name='home'),
@@ -18,6 +18,7 @@ urlpatterns = [
     path('index/',modelstaticView.as_view(),name='index'),
     path('indextemp/',modelstaticViewtemp.as_view(),name='indextemp'),
     path('slider/',SliderImage.as_view(),name='slider'),
+    path('search/',Search_kew_word.as_view(),name='search'),
 
     ##### customer urls######
     path('custermor-register/',CustomerRegisterView.as_view(),name='custermor_register'),
