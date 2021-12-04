@@ -1,11 +1,11 @@
 
-from payments.models import Customer
 from django.urls import path
-from .views import HomeView,addproductView,addCatergoryView,allCatergoryView,productdetailsView,addToCartView,CartView,ManageCartView,EmptyCartView,CheckoutView,placeOrderView,SliderImage,CustomerRegisterView,CustomerlogoutView,CustomerloginView,AdminRegisterView,AdminHome,AdminlogoutView,AdminloginView,adminProduct,Search_kew_word
+from .views import HomeView,addproductView,addCatergoryView,allCatergoryView,productdetailsView,addToCartView,CartView,ManageCartView,EmptyCartView,CardpaymentView,placeOrderView,SliderImage,CustomerRegisterView,CustomerlogoutView,CustomerloginView,AdminRegisterView,AdminHome,AdminlogoutView,AdminloginView,adminProduct,Search_kew_word,CardpaymentVerification
 urlpatterns = [
     ###### app urls #####
     path('',HomeView.as_view(),name='home'),
-    path('checkout/',CheckoutView.as_view(),name='checkout'),
+    path('cardpayment/',CardpaymentView.as_view(),name='card_payment'),
+    path('cardpaymentverification/',CardpaymentVerification.as_view(),name='checkout_verify'),
     path('addproduct/',addproductView.as_view(),name='addproduct'),
     path('addcatergory/',addCatergoryView.as_view(),name='addcatergory'),
     path('allcatergory/',allCatergoryView.as_view(),name='allcatergory'),
@@ -28,8 +28,8 @@ urlpatterns = [
     path('admin-register/',AdminRegisterView.as_view(),name='admin_register'),
     path('admin-logout/',AdminlogoutView.as_view(),name='admin_logout'),
     path('admin-login/',AdminloginView.as_view(),name='admin_login'),
-    path('admin-home',AdminHome.as_view(),name='admin_home'),
-    path('admin-product',adminProduct.as_view(),name='admin_product'),
+    path('admin-home/',AdminHome.as_view(),name='admin_home'),
+    path('admin-product/',adminProduct.as_view(),name='admin_product'),
     
 
 

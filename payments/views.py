@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.db.models.query import InstanceCheckMeta
 from django.http import request
+from django.http.response import JsonResponse
 from django.shortcuts import render,redirect
 from django.views.generic import TemplateView,CreateView,FormView,View
 from.forms import productForm,CatergoryForm,placeOrder,sliderImageform,customerform,loginForm,Adminform
@@ -51,16 +52,7 @@ class Search_kew_word(TemplateView):
 
 
 
-# CHECKOUT KARANA VIEW EKA
-class CheckoutView(EcomMixin, View):
-    def get(self, request, *args, **kwargs):
-        o_id = request.GET.get("o_id")
-        order = Order.objects.get(id=o_id)
-        context = {
-            "order": order
-            
-        }
-        return render(request, "checkout.html", context)
+
 
 
 #HOME VIEW EKA
@@ -276,25 +268,36 @@ class placeOrderView(CreateView):
             form.instance.discount = 0
             form.instance.total = cart_obj.total
             form.instance.order_status = "order received"
-            pm = form.cleaned_data.get('pyment_method')
-            order=form.save()
             # SESSON EKE HADAPU CART_ID EKA ORDER EKA PLACE KALATA PASSE DELETE KIREEMA
             del self.request.session['cart_id']
+            pm = form.cleaned_data.get('pyment_method')
+            order=form.save()
+            
             # payment options therima
             if pm =='Card Payment':
-                return redirect(reverse_lazy('checkout')+ "?o_id=" + str(order.id))
-
-                
+                return redirect(reverse('card_payment') + "?o_id=" + str(order.id))
         else:
-            return redirect('/home/')
+            return redirect(reverse_lazy("home"))
         return super().form_valid(form)
 
 
+# CHECKOUT KARANA VIEW EKA
+class CardpaymentView(View):
+    def get(self, request, *args, **kwargs):
+        o_id = request.GET.get('o_id')
+        order= Order.objects.get(id=o_id)
+        context = {
+            
+            'order':order
+        }
+        return render(request, "card_payment.html", context)
 
-
-
-
-## slider add karana view eka
+class CardpaymentVerification(View):
+    def get(self,request,*args,**kwargs):
+        success=request.Post.get("success")
+        
+        print(success)
+        return JsonResponse()
 
 
 
