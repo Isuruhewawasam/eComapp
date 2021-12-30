@@ -72,6 +72,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                ## third party
+                'social_django.context_processors.backends', # add this
+                'social_django.context_processors.login_redirect', # add this
             ],
         },
     },
