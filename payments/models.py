@@ -67,7 +67,7 @@ class Pimage(models.Model):
 
 #ALUTHIN CART EKAK CREATE KALAMA EKA STORE WENA DATABASE EKA
 class Cart(models.Model):
-    customer = models.ForeignKey(Customer,on_delete=models.SET_NULL,null=True,blank=True)
+    customer = models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True)
     total = models.PositiveIntegerField(default=0)
     creat_at = models.DateTimeField(auto_now_add=True)
 

@@ -2,8 +2,20 @@
 
 
 {% block body %}
+<style>
+   @media screen and (max-width: 600px) {
+    td:nth-child(6) {display:none;}
+    th:nth-child(6) {display:none;}
+    td:nth-child(7) {display:none;}
+    th:nth-child(7) {display:none;}
 
-    <h1>this is  All Products</h1>
+   }
+   @media screen and (max-width: 500px) {
+    .row{ overflow: auto;}
+    .table {width: 500px;}
+   }
+</style>
+    
 
 
     
@@ -14,7 +26,7 @@
     <div class="container">
         <div class="row">
             
-            <h4 class ='text-center'>All Products</h4><hr>
+            <h4 class ='text-center pt-5'>All Products</h4><hr>
             <div class="col-lg-12 col-md-3 col-12">
                 <table class="table">
                     <thead>

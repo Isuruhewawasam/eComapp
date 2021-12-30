@@ -24,10 +24,10 @@ class EcomMixin(object):
         cart_id = request.session.get('cart_id')
         if cart_id:
             cart_obj= Cart.objects.get(id=cart_id)
-            if request.user.is_authenticated and request.user.customer:
-                cart_obj.customer = request.user.customer
+            if request.user.is_authenticated:
+                cart_obj.customer = request.user
                 cart_obj.save()
-
+                
         return super().dispatch(request, *args, **kwargs)
 
 class AdminRequiredMixin(object):
@@ -56,7 +56,7 @@ class Search_kew_word(TemplateView):
 
 
 #HOME VIEW EKA
-class HomeView(EcomMixin, TemplateView):
+class HomeView(TemplateView):
     template_name ='home.html'
     def get_context_data(self, **kwargs):
         contex=super().get_context_data(**kwargs)
@@ -103,7 +103,7 @@ class addCatergoryView(CreateView):
 
 
 # CATERGORY WIDIYATA PRODUCT PENNANA VIEW EKA
-class allCatergoryView(EcomMixin,TemplateView):
+class allCatergoryView(TemplateView):
     template_name = 'allcatergory.html'
     def get_context_data(self, **kwargs):
         contex =super().get_context_data(**kwargs)
@@ -112,7 +112,7 @@ class allCatergoryView(EcomMixin,TemplateView):
 
 
 # PRODUCT DETAILS PENNANA VIEW EKA
-class productdetailsView(EcomMixin,TemplateView):
+class productdetailsView(TemplateView):
     template_name= 'details.html'
     def get_context_data(self, **kwargs): 
         contex = super().get_context_data(**kwargs)
@@ -159,7 +159,7 @@ class addToCartView(EcomMixin,TemplateView):
                     cart=cart_obj, product=product_obj, rate=product_obj.selling_price, quantity=1, subtotal=product_obj.selling_price)
                 cart_obj.total += product_obj.selling_price
                 cart_obj.save()
-
+        # creat a new cart
         else:
             cart_obj = Cart.objects.create(total=0)
             self.request.session['cart_id'] = cart_obj.id
@@ -173,7 +173,7 @@ class addToCartView(EcomMixin,TemplateView):
 
 
 # CART EKA PENNANA VIEW EKA
-class CartView(EcomMixin, TemplateView):
+class CartView(TemplateView):
     template_name = 'cart.html'
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
@@ -188,7 +188,7 @@ class CartView(EcomMixin, TemplateView):
 
 
 # CART EKE PRODUCT ADU WADI SAHA REMUVE KARANA VIEW EKA
-class ManageCartView(EcomMixin,View):
+class ManageCartView(View):
     def get(self, request, *args, **kwargs):
         cp_id = self.kwargs["cp_id"]
         action = request.GET.get("action")
@@ -221,7 +221,7 @@ class ManageCartView(EcomMixin,View):
 
 
 # CART EKA SAMPUURNAYENMA EMTEY KARANA VIEW EKA
-class EmptyCartView(EcomMixin,View):
+class EmptyCartView(View):
     def get(self, request, *args, **kwargs):
         cart_id = request.session.get("cart_id", None)
         if cart_id:
@@ -233,14 +233,14 @@ class EmptyCartView(EcomMixin,View):
 
 
 # ORDER EKA PLEACE KARANA SAHA ORDER EKE FORM EKA PURAWANA VIEW EKA
-class placeOrderView(CreateView):
+class placeOrderView(EcomMixin,CreateView):
     template_name = 'placeorder.html'
     form_class = placeOrder
     success_url = reverse_lazy('home')
 
     def dispatch(self, request, *args, **kwargs):
         user = request.user
-        if user.is_authenticated and user.customer:
+        if user.is_authenticated:
             pass
         else:
             return redirect("/custermor-login/?next=/placeOrder/")  ###?next=/checkout/
@@ -381,7 +381,7 @@ class CustomerRegisterView(CreateView):
         password = form.cleaned_data.get("password")
         user = User.objects.create_user(username,email,password)
         form.instance.user= user
-        login(self.request,user)
+        #login(self.request,user)
         return super().form_valid(form)
 
 class CustomerlogoutView(View):

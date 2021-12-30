@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-s_*+^y@u8*hop_vfufz1gdweb%&$m5nwme255pltcmou$8x+ht
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['futurefations.org','localhost','127.0.0.1']
 
 
 # Application definition
@@ -39,6 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'payments',
+
+    ## third party app
+    'social_django', # add this
+    'django_extensions',
+    
+
     
 ]
 
@@ -50,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'checkout.urls'
@@ -69,6 +76,21 @@ TEMPLATES = [
         },
     },
 ]
+
+# add this
+AUTHENTICATION_BACKENDS = [
+    
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
+]
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '467782612727-kgiigiifd53nbav18midbtb6udvtm06j.apps.googleusercontent.com'       # App ID
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'  # App Secret
+
+SOCIAL_AUTH_FACEBOOK_KEY = '449412603468608'       # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '024e5c9f1c66e4e024cecc5000a79c9c'
+
 
 WSGI_APPLICATION = 'checkout.wsgi.application'
 
@@ -123,7 +145,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL ='/media/'
 
-
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = '/'
 
 
 

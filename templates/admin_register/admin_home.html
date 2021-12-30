@@ -1,72 +1,82 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body{ font-family: Arial, Helvetica, sans-serif;margin: 0;}
-        .container{ width: 960px;margin: auto;}
-        .table{ width: 100%; border-collapse: collapse;}
-        tr,td{ border: 1px solid black;}
-        
-        
-        
-        @media screen and (max-width: 960px){
-            .container{ width: 100%;}
-            
-        }
-        @media screen and (max-width: 600px){
-            td:nth-child(5) {display:none;}
-            th:nth-child(5) {display:none;}
-            
-        }
-        @media screen and (max-width: 500px){
-            .cector {overflow: auto;}
-            .table {width: 500;}
-        }
-        
-    </style>
-</head>
-<body>
-    <div class="container">
-       <center><h2 style="font-style: italic; font-family: Georgia, 'Times New Roman', Times, serif; color: blue;">Admin's Home</h2></center>
-       <div class="cector">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>SN</th>
-                    <th>order number</th>
-                    <th>Name</th>
-                    <th>Phone Number</th>
-                    <th>Address</th>
-                    <th>Subtotal</th>
-                    <th>Order status</th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                {% for cp in order %}
-                <tr>
-                    <td>{{forloop.counter}}</td>
-                    <td>{{cp.id}}</td>
-    
-                    <td>{{cp.order_by}}</td>
-                    <td>{{cp.mobile}}</td>
-                    <td>{{cp.shipping_address}}</td>
-                    <td>{{cp.total}}</td>
-                    <td>{{cp.order_status}}</td>
-                   
-                </tr>
-                  
-                {% endfor %}
-                
-            </tbody>
-           </table>
 
-       </div> 
-       
-       
+   
+{% extends 'admin_register/admin_base.html' %}
+
+
+{% block body %}
+
+<style>
+    
+    @media screen and (max-width: 683px){
+        td:nth-child(5) {display:none;}
+        th:nth-child(5) {display:none;}
+        
+    }
+    @media screen and (max-width: 500px){
+        .row {overflow: auto;}
+        .table {width: 500;}
+    }
+    
+</style>
+
+    
+
+    
+
+
+    
+    
+    <div class="container">
+        <div class="row">
+            
+            <h4 class ='text-center pt-3'>Orders</h4><hr>
+            <div class="col-lg-12 col-md-4 col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>order number</th>
+                            <th>Name</th>
+                            <th>Phone Number</th>
+                            <th>Address</th>
+                            <th>Subtotal</th>
+                            <th>Order status</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cp in order %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{cp.id}}</td>
+
+                            <td>{{cp.order_by}}</td>
+                            <td>{{cp.mobile}}</td>
+                            <td>{{cp.shipping_address}}</td>
+                            <td>{{cp.total}}</td>
+                            <td>{{cp.order_status}}</td>
+                           
+                        </tr>
+                          
+                        {% endfor %}
+                        
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
     </div>
-</body>
-</html>
+    
+    
+    
+    
+    {% endblock body %}
+    
+    
+    
+    
+    
+    
+
+
+

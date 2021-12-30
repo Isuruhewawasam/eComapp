@@ -29,6 +29,16 @@
                 {% endif %}
             </form>
         </div>
+        <div class="col-md-6">
+            <button class="btn btn mb-2 pb-3" style="border-radius: 25%; background-color: coral; color: #000; text-decoration: none;">
+                <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google
+                </a>
+            </button></br>
+            <button class="btn btn-primary mb-2">
+                <a href="{% url 'social:begin' 'facebook' %}">Login with facebook
+                </a>
+            </button>
+        </div>  
     </div>
 </div>
 {% endblock %}

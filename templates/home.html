@@ -56,11 +56,11 @@
     <section>
       <hr class=" mx-auto mt-3">
     <h2 style="color: chocolate;font-family: Cambria; " class="text-center mt-3 fw-bold shadow-sm">Products</h2>
-    <div class="row ">
+    <div class="row">
         {% for pro in product %}
       <div class="col-lg-4 col-md-12 col-12 mt-5">
-        <div class="card shadow-lg" style="width: 15rem;" >
-				  <img src="{{pro.image.url}}" class="card-img-top" alt="..."width="180" height="180">
+        <div class="card shadow-lg mx-auto" style="width: 15rem;" >
+				  <img src="{{pro.image.url}}" class="card-img-top" alt="..."width="180" height="180" style="padding: 5px;border-radius: 25%; cursor: pointer;">
           
 				  <div class="card-body">
 				    <h5 class="card-title text-center"><a class="lin text-decoration-none" href="{% url 'product_details' pro.slug %}">{{pro.product_name}}</a></h5>
