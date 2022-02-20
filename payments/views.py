@@ -65,7 +65,6 @@ class HomeView(TemplateView):
         paginator = Paginator(product_obj, 3) # Show 3 contacts per page.
         page_number = self.request.GET.get('page')
         product_list = paginator.get_page(page_number)
-        
         contex['product']=product_list
         ## slider eka
         contex['product_slider']=slider.objects.all().order_by('-id')[:5]

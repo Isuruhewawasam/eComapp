@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     ## third party app
     'social_django', # add this
+    ##### for https security #####
     'django_extensions',
     
 
@@ -148,7 +149,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL ='/media/'
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'custermor_login'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = '/'
@@ -162,6 +163,16 @@ STATICFILES_DIRS = (
 )
 
 MEDIA_ROOT= os.path.join(BASE_DIR,'media')
+
+
+#SMTP Configuration(reset password by email)
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'malminala123@gmail.com'
+EMAIL_HOST_PASSWORD = 'malmi123@'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

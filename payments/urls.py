@@ -1,4 +1,4 @@
-
+from django.contrib.auth import views as auth_view
 from django.urls import path
 from .views import HomeView,addproductView,addCatergoryView,allCatergoryView,productdetailsView,addToCartView,CartView,ManageCartView,EmptyCartView,CardpaymentView,placeOrderView,SliderImage,CustomerRegisterView,CustomerlogoutView,CustomerloginView,AdminRegisterView,AdminHome,AdminlogoutView,AdminloginView,adminProduct,Search_kew_word,CardpaymentVerification
 urlpatterns = [
@@ -30,7 +30,14 @@ urlpatterns = [
     path('admin-login/',AdminloginView.as_view(),name='admin_login'),
     path('admin-home/',AdminHome.as_view(),name='admin_home'),
     path('admin-product/',adminProduct.as_view(),name='admin_product'),
+
+    ##### password reset urls by using email #####
     
+    path('reset_password/',auth_view.PasswordResetView.as_view(),name='reset_password'),
+    path('reset_password_sent/',auth_view.PasswordResetDoneView.as_view(),name='password_reset_done'),
+    path('reset/<uidb64>/<token>/',auth_view.PasswordResetConfirmView.as_view(),name='password_reset_confirm'),
+    path('reset_password_complete/',auth_view.PasswordResetCompleteView.as_view(),name='password_reset_complete'),
+   
 
 
 ]

@@ -28,14 +28,19 @@
                     </li>
                 {% endif %}
             </form>
+            <hr>
+            <a href="{% url 'reset_password' %}">Forget your Password
+            </a>
         </div>
         <div class="col-md-6">
-            <button class="btn btn mb-2 pb-3" style="border-radius: 25%; background-color: coral; color: #000; text-decoration: none;">
-                <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google
+            <h6 class="ml-5" style= " color: coral; font-family: 'Courier New', Courier, monospace; font-size: x-large;font-weight: bold;">Login With</h6>
+            <hr class="mx-start">
+            <button class="btn btn-light mb-2  ml-5 mr-2 " >
+                <a href="{% url 'social:begin' 'google-oauth2' %}"> <i class="fab fa-google"></i>
                 </a>
-            </button></br>
-            <button class="btn btn-primary mb-2">
-                <a href="{% url 'social:begin' 'facebook' %}">Login with facebook
+            </button>
+            <button class="btn btn-light mb-2">
+                <a href="{% url 'social:begin' 'facebook' %}"> <i class="fab fa-facebook-f"></i>
                 </a>
             </button>
         </div>  
